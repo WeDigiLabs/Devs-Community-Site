@@ -1,0 +1,16 @@
+node_modules
+dist
+server/devs.db
+server/devs.db-*
+server/uploads
+.claude
+.env
+.env.*
+*.tar.gz
+dist-ssr
+*.local
+.DS_Store
+.vite
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

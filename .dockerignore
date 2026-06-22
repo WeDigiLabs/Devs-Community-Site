@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.gitignore
+.claude
+*.local
+npm-debug.log*
+Dockerfile
+.dockerignore
+docker-compose.yml
+README*.md
+# Never bake local data into the image — it lives in the /data volume
+server/devs.db
+server/devs.db-*
+server/uploads

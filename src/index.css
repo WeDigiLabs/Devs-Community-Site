@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-black text-white font-sans antialiased;
+    font-feature-settings: 'ss01', 'ss02';
+  }
+
+  /* Very subtle film-grain — gives the flat black a printed-paper depth. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: screen;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-white ring-offset-2 ring-offset-black;
+  }
+
+  ::selection {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+@layer components {
+  .container-devs {
+    @apply mx-auto w-full max-w-content px-6 md:px-10;
+  }
+
+  /* Mono micro-label used as section/eyebrow tags. */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-muted;
+  }
+
+  /* Solid white pill that inverts to an outline on hover. Add `group` in
+     markup when an inner arrow needs to react to the button's hover. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white bg-white px-7 py-3 text-sm font-semibold text-black transition-colors duration-200 hover:bg-transparent hover:text-white;
+  }
+
+  /* Outlined pill that fills on hover. */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white hover:bg-white hover:text-black;
+  }
+
+  /* Hairline grid: the 1px gap reveals the border colour behind the cells. */
+  .grid-hairline {
+    @apply grid gap-px overflow-hidden rounded-2xl border border-border bg-border;
+  }
+  .cell {
+    @apply bg-black transition-colors duration-200;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-border bg-surface px-4 py-3 text-[15px] text-white placeholder:text-muted/50 transition-colors duration-200 focus:border-white focus:outline-none;
+  }
+
+  .label-field {
+    @apply mb-2 block font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-muted;
+  }
+}
+
+@layer utilities {
+  /* Outlined display type. */
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+    color: transparent;
+  }
+  @media (min-width: 768px) {
+    .text-stroke {
+      -webkit-text-stroke-width: 2px;
+    }
+  }
+
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
+
+  /* Hide scrollbars on horizontal scroll rows (mobile filter pills). */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Native cursor is hidden only while the custom cursor is mounted
+     (fine pointers, motion allowed) — the class is toggled from Cursor.jsx. */
+  @media (pointer: fine) {
+    .cursor-hidden,
+    .cursor-hidden * {
+      cursor: none !important;
+    }
+  }
+
+  /* Animated underline that grows from the left on hover. */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-300;
+  }
+  .link-underline:hover::after {
+    @apply scale-x-100;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

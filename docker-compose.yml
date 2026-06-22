@@ -1,0 +1,19 @@
+services:
+  devs:
+    build: .
+    image: devs-community
+    container_name: devs-community
+    restart: unless-stopped
+    ports:
+      - "5174:5174"
+    environment:
+      # ⚠️ Change this before going public
+      ADMIN_PASSWORD: "change-this-password"
+      PORT: "5174"
+      DATA_DIR: "/data"
+    volumes:
+      # Database + uploaded images/videos persist here across rebuilds
+      - devs-data:/data
+
+volumes:
+  devs-data:
