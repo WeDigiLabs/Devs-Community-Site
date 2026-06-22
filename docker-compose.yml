@@ -8,7 +8,7 @@ services:
       - "5174:5174"
     environment:
       # ⚠️ Change this before going public
-      ADMIN_PASSWORD: "change-this-password"
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-devs2025}
       PORT: "5174"
       DATA_DIR: "/data"
     volumes:
