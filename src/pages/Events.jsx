@@ -138,7 +138,7 @@ function UpcomingEventCard({ event, index }) {
         </div>
 
         {/* Poster panel — uploaded image or numbered pattern slot */}
-        <div className="relative min-h-[240px] overflow-hidden border-t border-border lg:border-l lg:border-t-0">
+        <div className="relative aspect-square overflow-hidden border-t border-border lg:aspect-auto lg:border-l lg:border-t-0">
           {event.image_url ? (
             <img
               src={event.image_url}
